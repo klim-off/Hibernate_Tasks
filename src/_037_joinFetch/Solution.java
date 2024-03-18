@@ -26,11 +26,11 @@ public class Solution {
 
     public static List<Task> getTasks() {
         //напишите тут ваш код
-      try (Session session = MySessionFactory.getSessionFactory().openSession()) {
-          String hql = "select distinct task from Task t left join fetch t.employee order by t.deadline ";
-          Query<Task> query = session.createQuery(hql, Task.class);
-          return null; //query.list();
+        try (Session session = MySessionFactory.getSessionFactory().openSession()) {
+            String hql = "select distinct t from Task t left join fetch t.employees order by t.deadline";
+            Query<Task> query = session.createQuery(hql, Task.class);
+            return query.list();
+        }
       }
 
     }
-}
